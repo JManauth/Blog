@@ -3,6 +3,13 @@
 
 <section class="articles">
     {{#each articles as |article|}}
-    {{!-- {{>article-details}} --}}
+    <div>
+        <h2>
+            <a href="/projects/{{article.id}}">{{article.title}}</a>
+        </h2>
+        <p>
+            Created by: {{article.user.user_name}} 
+        </p>
+    </div>
     {{/each}}
 </section>

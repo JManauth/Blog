@@ -7,10 +7,11 @@ router.get('/', async (req, res) => {
             attributes: {exclude: ['id', 'author_id']},
             include: [{model: User, attributes:['user_name']}]
         });
-
+        console.log(dbArticleData);
         const articles = dbArticleData.map((article) => 
         article.get({plain:true })
         );
+        console.log(articles);
         res.render('homepage', {
             articles,
         });
@@ -21,6 +22,10 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/login', async (req, res) => {
+    if(req.session.logged_in){
+        res.redirect('/');
+        return;
+    }
     res.render('login');
 });
 
