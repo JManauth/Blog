@@ -20,12 +20,16 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/login', async (re, res) => {
+router.get('/login', async (req, res) => {
     res.render('login');
 });
 
-router.get('/signup', async (re, res) => {
+router.get('/signup', async (req, res) => {
     res.render('signup');
+});
+
+router.get('/newArticle', async (req, res) => {
+    res.render('newArticle');
 });
 
 
