@@ -4,14 +4,14 @@ const { Article, Comment, User } = require('../models');
 router.get('/', async (req, res) => {
     try{
         const dbArticleData = await Article.findAll({
-            attributes: {exclude: ['id', 'author_id']},
+            attributes: {exclude: [ 'author_id']},
             include: [{model: User, attributes:['user_name']}]
         });
-        console.log(dbArticleData);
+        
         const articles = dbArticleData.map((article) => 
         article.get({plain:true })
         );
-        console.log(articles);
+        
         res.render('homepage', {
             articles,
         });
@@ -19,6 +19,24 @@ router.get('/', async (req, res) => {
         console.log(err);
         res.status(500).json(err);
     }
+});
+router.get('/articles/:id', async (req, res) => {
+ try{
+     const dbArticleData = await Article.findByPk(req.params.id, {
+        include: [{model: User, attributes:['user_name']}]
+     });
+
+     const article = dbArticleData.products.map((articles) => 
+     articles.get({plain:true})
+     );
+
+     res.render('articles', {
+         article
+     });
+ } catch(err){
+    console.log(err);
+    res.status(500).json(err);
+ }
 });
 
 router.get('/login', async (req, res) => {
