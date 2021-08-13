@@ -26,9 +26,8 @@ router.get('/articles/:id', async (req, res) => {
         include: [{model: User, attributes:['user_name']}]
      });
 
-     const article = dbArticleData.products.map((articles) => 
-     articles.get({plain:true})
-     );
+     const article = dbArticleData.get({plain:true})
+     
 
      res.render('articles', {
          article
